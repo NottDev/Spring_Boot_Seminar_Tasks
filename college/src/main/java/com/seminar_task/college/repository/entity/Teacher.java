@@ -9,6 +9,7 @@ import java.util.Set;
 public class Teacher {
 
     @Id
+    @Column(name = "TEACHER_ID", unique = true)
     private Integer id;
 
     @Column(name = "TEACHER_NAME", nullable = false)
@@ -21,7 +22,7 @@ public class Teacher {
     private Integer age;
 
     @OneToMany(mappedBy = "teacher")
-    private Set<College_Class> classes;
+    private Set<CollegeClass> classes;
 
     public Teacher(Integer id, String name, String lastName){
         this.id = id;
@@ -64,11 +65,11 @@ public class Teacher {
         this.age = age;
     }
 
-    public Set<College_Class> getClasses() {
+    public Set<CollegeClass> getClasses() {
         return classes;
     }
 
-    public void setClasses(Set<College_Class> classes) {
+    public void setClasses(Set<CollegeClass> classes) {
         this.classes = classes;
     }
 }
