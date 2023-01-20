@@ -14,6 +14,9 @@ public class CollegeClass {
     @Column(name = "CLASS_TOPIC", nullable = false)
     private String className;
 
+    @Column(name = "SCHEDULE", nullable = false)
+    private String schedule;
+
     @ManyToOne
     @JoinColumn(name = "TEACHER_FK", nullable = false)
     private Teacher teacher;
@@ -53,5 +56,13 @@ public class CollegeClass {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 }

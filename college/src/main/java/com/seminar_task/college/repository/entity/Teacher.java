@@ -1,5 +1,6 @@
 package com.seminar_task.college.repository.entity;
 
+import com.seminar_task.college.dto.TeacherDTO;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -32,6 +33,13 @@ public class Teacher {
     }
 
     public Teacher(){}
+
+    public Teacher(TeacherDTO teacher) {
+        this.id = teacher.getId();
+        this.name = teacher.getName();
+        this.lastName = teacher.getLastName();
+        this.age = teacher.getAge();
+    }
 
     public Integer getId() {
         return id;
