@@ -1,5 +1,6 @@
 package com.seminar_task.college.repository.entity;
 
+import com.seminar_task.college.dto.StudentDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -34,6 +35,14 @@ public class Student {
         this.lastName = lastName;
         this.dob = dob;
         this.age = age;
+    }
+
+    public Student(StudentDTO studentDTO){
+        this.id = studentDTO.getId();
+        this.name = studentDTO.getName();
+        this.lastName = studentDTO.getLastName();
+        this.dob = studentDTO.getDob();
+        this.age = studentDTO.getAge();
     }
 
     public Integer getId() {

@@ -1,5 +1,6 @@
 package com.seminar_task.college.repository.entity;
 
+import com.seminar_task.college.dto.CollegeClassDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,9 +8,8 @@ import jakarta.persistence.*;
 public class CollegeClass {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true)
-    private Long classId;
+    private Integer classId;
 
     @Column(name = "CLASS_TOPIC", nullable = false)
     private String className;
@@ -18,13 +18,27 @@ public class CollegeClass {
     private String schedule;
 
     @ManyToOne
-    @JoinColumn(name = "TEACHER_FK", nullable = false)
+    @JoinColumn(name = "TEACHER_FK")
     private Teacher teacher;
 
     @OneToOne(mappedBy = "collegeClass")
     private Student student;
 
     public CollegeClass(){}
+
+    public CollegeClass(Integer classId, String className, String schedule) {
+        this.classId = classId;
+        this.className = className;
+        this.schedule = schedule;
+    }
+
+    public CollegeClass(CollegeClassDTO collegeClassDTO){
+        this.classId = collegeClassDTO.getClassId();
+        this.className = collegeClassDTO.getClassName();
+        this.schedule = collegeClassDTO.getSchedule();
+        this.teacher = collegeClassDTO.getTeacher();
+        this.student = collegeClassDTO.getStudent();
+    }
 
     public Teacher getTeacher() {
         return teacher;
@@ -42,11 +56,11 @@ public class CollegeClass {
         this.className = className;
     }
 
-    public Long getClassId() {
+    public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(Long classId) {
+    public void setClassId(Integer classId) {
         this.classId = classId;
     }
 

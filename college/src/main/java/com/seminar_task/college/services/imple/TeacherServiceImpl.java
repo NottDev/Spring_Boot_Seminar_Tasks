@@ -4,7 +4,7 @@ import com.seminar_task.college.dto.TeacherDTO;
 import com.seminar_task.college.repository.ITeacherRepository;
 import com.seminar_task.college.repository.entity.Teacher;
 import com.seminar_task.college.services.ITeacherService;
-import com.seminar_task.college.services.OutputMessages;
+import com.seminar_task.college.services.utilities.OutputMessages;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +18,8 @@ public class TeacherServiceImpl implements ITeacherService {
     public TeacherServiceImpl(ITeacherRepository repository) {
         this.repository = repository;
     }
-
     @Override
     public String save(TeacherDTO teacher) {
-
         boolean elementChecker = repository.existsById(teacher.getId());
 
         if(elementChecker) {
@@ -35,9 +33,8 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public String update(TeacherDTO teacher) {
-
         Optional<Teacher> value = repository.findById(teacher.getId());
-        if(value.isEmpty()){
+        if(value.isPresent()){
             repository.save(new Teacher(teacher));
             return outputMsg.UpdateSuccess();
         } else {

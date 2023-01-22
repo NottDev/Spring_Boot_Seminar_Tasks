@@ -2,12 +2,11 @@ package com.seminar_task.college.dto;
 
 import com.seminar_task.college.repository.entity.CollegeClass;
 import com.seminar_task.college.repository.entity.Student;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import com.seminar_task.college.services.utilities.CalculateAge;
 
 public class StudentDTO {
+
+    CalculateAge calculateAge = new CalculateAge();
 
     private Integer id;
     private String name;
@@ -18,12 +17,12 @@ public class StudentDTO {
 
     public StudentDTO(){}
 
-    public StudentDTO(Integer id, String name, String lastName, String dob, Integer age) {
+    public StudentDTO(Integer id, String name, String lastName, String dob) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dob = dob;
-        this.age = age;
+        this.age = getAge();
     }
 
     public StudentDTO(Student student) {
@@ -31,7 +30,7 @@ public class StudentDTO {
         this.name = student.getName();
         this.lastName = student.getLastName();
         this.dob = student.getDob();
-        this.age = student.getAge();
+        this.age = getAge();
     }
 
     public Integer getId() {
@@ -67,11 +66,8 @@ public class StudentDTO {
     }
 
     public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
+        Integer dobYear = calculateAge.getDobYear(getDob());
+        return calculateAge.foundAge(dobYear);
     }
 
     public CollegeClass getCollegeClass() {
