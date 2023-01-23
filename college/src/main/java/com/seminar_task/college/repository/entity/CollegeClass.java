@@ -1,5 +1,6 @@
 package com.seminar_task.college.repository.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import com.seminar_task.college.dto.CollegeClassDTO;
 import jakarta.persistence.*;
 
@@ -18,18 +19,21 @@ public class CollegeClass {
     private String schedule;
 
     @ManyToOne
-    @JoinColumn(name = "TEACHER_FK")
+    @JoinColumn(name = "TEACHER_ID")
     private Teacher teacher;
 
     @OneToOne(mappedBy = "collegeClass")
+    @JoinColumn(name = "STUDENT")
     private Student student;
 
     public CollegeClass(){}
 
-    public CollegeClass(Integer classId, String className, String schedule) {
+    public CollegeClass(Integer classId, String className, String schedule, Teacher teacher, Student student) {
         this.classId = classId;
         this.className = className;
         this.schedule = schedule;
+        this.teacher = teacher;
+        this.student = student;
     }
 
     public CollegeClass(CollegeClassDTO collegeClassDTO){
@@ -40,6 +44,7 @@ public class CollegeClass {
         this.student = collegeClassDTO.getStudent();
     }
 
+    @JsonBackReference
     public Teacher getTeacher() {
         return teacher;
     }

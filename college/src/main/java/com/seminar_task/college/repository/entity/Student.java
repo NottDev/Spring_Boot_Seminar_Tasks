@@ -1,5 +1,6 @@
 package com.seminar_task.college.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.seminar_task.college.dto.StudentDTO;
 import jakarta.persistence.*;
 
@@ -23,18 +24,19 @@ public class Student {
     @Column(name = "STUDENT_AGE")
     private Integer age;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CLASS_TAKEN_ID", referencedColumnName = "ID")
+    @OneToOne
+    @JoinColumn(name = "CLASS_TAKEN_ID")
     private CollegeClass collegeClass;
 
     public Student(){}
 
-    public Student(Integer id, String name, String lastName, String dob, Integer age) {
+    public Student(Integer id, String name, String lastName, String dob, Integer age, CollegeClass collegeClass) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dob = dob;
         this.age = age;
+        this.collegeClass = collegeClass;
     }
 
     public Student(StudentDTO studentDTO){
@@ -43,6 +45,7 @@ public class Student {
         this.lastName = studentDTO.getLastName();
         this.dob = studentDTO.getDob();
         this.age = studentDTO.getAge();
+        this.collegeClass = studentDTO.getCollegeClass();
     }
 
     public Integer getId() {
@@ -85,6 +88,7 @@ public class Student {
         this.age = age;
     }
 
+    @JsonBackReference
     public CollegeClass getCollegeClass() {
         return collegeClass;
     }

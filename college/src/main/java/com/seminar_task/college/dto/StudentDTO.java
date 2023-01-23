@@ -17,12 +17,13 @@ public class StudentDTO {
 
     public StudentDTO(){}
 
-    public StudentDTO(Integer id, String name, String lastName, String dob) {
+    public StudentDTO(Integer id, String name, String lastName, String dob, CollegeClass collegeClass) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dob = dob;
         this.age = getAge();
+        this.collegeClass = collegeClass;
     }
 
     public StudentDTO(Student student) {
@@ -31,6 +32,7 @@ public class StudentDTO {
         this.lastName = student.getLastName();
         this.dob = student.getDob();
         this.age = getAge();
+        this.collegeClass = student.getCollegeClass();
     }
 
     public Integer getId() {

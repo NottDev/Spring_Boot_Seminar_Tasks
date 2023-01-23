@@ -7,16 +7,13 @@ import com.seminar_task.college.repository.entity.Teacher;
 public class CollegeClassDTO {
 
     private Integer classId;
-
     private String className;
-
     private String schedule;
-
     private Teacher teacher;
-
     private Student student;
 
     public CollegeClassDTO(){}
+
     public CollegeClassDTO(Integer classId, String className, String schedule) {
         this.classId = classId;
         this.className = className;
@@ -70,4 +67,5 @@ public class CollegeClassDTO {
     public void setStudent(Student student) {
         this.student = student;
     }
+
 }

@@ -1,6 +1,9 @@
 package com.seminar_task.college.dto;
 
+import com.seminar_task.college.repository.entity.CollegeClass;
 import com.seminar_task.college.repository.entity.Teacher;
+
+import java.util.List;
 
 public class TeacherDTO {
 
@@ -8,14 +11,16 @@ public class TeacherDTO {
     private String name;
     private String lastName;
     private Integer age;
+    private List<CollegeClass> classes;
 
     public TeacherDTO(){}
 
-    public TeacherDTO(Integer id, String name, String lastName, Integer age){
+    public TeacherDTO(Integer id, String name, String lastName, Integer age, List<CollegeClass> collegeClasses){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
+        this.classes = collegeClasses;
     }
 
     public TeacherDTO(Teacher teacher){
@@ -23,6 +28,7 @@ public class TeacherDTO {
         this.name = teacher.getName();
         this.lastName = teacher.getLastName();
         this.age = teacher.getAge();
+        this.classes = teacher.getClasses();
     }
 
     public Integer getId() {
@@ -55,5 +61,13 @@ public class TeacherDTO {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<CollegeClass> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<CollegeClass> classes) {
+        this.classes = classes;
     }
 }

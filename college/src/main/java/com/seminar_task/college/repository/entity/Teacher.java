@@ -1,9 +1,11 @@
 package com.seminar_task.college.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.seminar_task.college.dto.TeacherDTO;
 import jakarta.persistence.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "TEACHERS")
@@ -22,14 +24,15 @@ public class Teacher {
     @Column(name = "TEACHER_AGE")
     private Integer age;
 
-    @OneToMany(mappedBy = "teacher")
-    private Set<CollegeClass> classes;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<CollegeClass> classes;
 
-    public Teacher(Integer id, String name, String lastName){
+    public Teacher(Integer id, String name, String lastName, Integer age){
         this.id = id;
         this.name = name;
         this.lastName = lastName;
-        this.age = getAge();
+        this.age = age;
     }
 
     public Teacher(){}
@@ -73,11 +76,11 @@ public class Teacher {
         this.age = age;
     }
 
-    public Set<CollegeClass> getClasses() {
+    public List<CollegeClass> getClasses() {
         return classes;
     }
 
-    public void setClasses(Set<CollegeClass> classes) {
+    public void setClasses(List<CollegeClass> classes) {
         this.classes = classes;
     }
 }
